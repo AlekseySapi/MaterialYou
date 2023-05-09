@@ -26,6 +26,12 @@
         <activity
             android:name=".ui.bottomnavigation.BottomNavigationActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.animations.AnimationsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.animations.AnimationsActivityBonus"
+            android:exported="true" />
     </application>
 
 </manifest>
