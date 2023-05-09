@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.geekbrains.materialyou.R
-import com.geekbrains.materialyou.databinding.FragmentPictureOfTheDayBinding
+import com.geekbrains.materialyou.databinding.FragmentPictureOfTheDayStartBinding
 import com.geekbrains.materialyou.ui.MainActivity
 import com.geekbrains.materialyou.ui.bottomnavigation.BottomNavigationActivity
 import com.geekbrains.materialyou.ui.settings.SettingsFragment
@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PictureOfTheDayFragment : Fragment() {
 
-    private var _binding: FragmentPictureOfTheDayBinding? = null
+    private var _binding: FragmentPictureOfTheDayStartBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
@@ -38,7 +38,7 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getData()
             .observe(viewLifecycleOwner) { renderData(it) }
 
-        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureOfTheDayStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
