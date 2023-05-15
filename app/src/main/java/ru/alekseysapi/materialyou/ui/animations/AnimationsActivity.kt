@@ -10,16 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.geekbrains.materialyou.databinding.ActivityAnimationsFabScrollBinding
 
-private const val rotation = "rotation"
-private const val translationY = "translationY"
-private const val rotationFrom = 0f
-private const val rotationTo = 225f
-private const val translationOneContainer = -130f
-private const val translationTwoContainer = -250f
-private const val translationPlusImageFrom = 0f
-private const val translationPlusImageTo = -180f
-private const val translationZero = 0f
-
 class AnimationsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAnimationsFabScrollBinding
@@ -64,9 +54,9 @@ class AnimationsActivity : AppCompatActivity() {
 
     private fun expandFAB() {
         isExpanded = true
-        ObjectAnimator.ofFloat(binding.plusImageview, rotation, rotationFrom, rotationTo).start()
-        ObjectAnimator.ofFloat(binding.optionTwoContainer, translationY, translationTwoContainer).start()
-        ObjectAnimator.ofFloat(binding.optionOneContainer, translationY, translationOneContainer).start()
+        ObjectAnimator.ofFloat(binding.plusImageview, "rotation", 0f, 225f).start()
+        ObjectAnimator.ofFloat(binding.optionTwoContainer, "translationY", -130f).start()
+        ObjectAnimator.ofFloat(binding.optionOneContainer, "translationY", -250f).start()
 
         binding.optionTwoContainer.animate()
             .alpha(1f)
@@ -102,10 +92,9 @@ class AnimationsActivity : AppCompatActivity() {
 
     private fun collapseFab() {
         isExpanded = false
-
-        ObjectAnimator.ofFloat(binding.plusImageview, rotation, translationPlusImageFrom, translationPlusImageTo).start()
-        ObjectAnimator.ofFloat(binding.optionTwoContainer, translationY, translationZero).start()
-        ObjectAnimator.ofFloat(binding.optionOneContainer, translationY, translationZero).start()
+        ObjectAnimator.ofFloat(binding.plusImageview, "rotation", 0f, -180f).start()
+        ObjectAnimator.ofFloat(binding.optionTwoContainer, "translationY", 0f).start()
+        ObjectAnimator.ofFloat(binding.optionOneContainer, "translationY", 0f).start()
 
         binding.optionTwoContainer.animate()
             .alpha(0f)
