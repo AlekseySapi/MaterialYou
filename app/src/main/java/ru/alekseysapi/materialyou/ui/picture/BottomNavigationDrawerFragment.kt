@@ -9,6 +9,7 @@ import com.geekbrains.materialyou.R
 import com.geekbrains.materialyou.databinding.BottomNavigationLayoutBinding
 import com.geekbrains.materialyou.ui.animations.AnimationsActivity
 import com.geekbrains.materialyou.ui.animations.AnimationsActivityBonus
+import com.geekbrains.materialyou.ui.recycler.RecyclerActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
@@ -31,13 +32,32 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_one -> {
-                    activity?.let { startActivity(Intent(it, AnimationsActivity::class.java)) }
+                R.id.navigation_one -> activity?.let {
+                    startActivity(
+                        Intent(
+                            it,
+                            AnimationsActivity::class.java
+                        )
+                    )
                 }
-                R.id.navigation_two -> {
-                    activity?.let { startActivity(Intent(it, AnimationsActivityBonus::class.java)) }
+                R.id.navigation_two -> activity?.let {
+                    startActivity(
+                        Intent(
+                            it,
+                            AnimationsActivityBonus::class.java
+                        )
+                    )
+                }
+                R.id.navigation_three -> activity?.let {
+                    startActivity(
+                        Intent(
+                            it,
+                            RecyclerActivity::class.java
+                        )
+                    )
                 }
             }
+            dismiss()
             true
         }
     }
