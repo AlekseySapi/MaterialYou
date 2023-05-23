@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.materialyou.R
 import com.geekbrains.materialyou.ui.recycler.Data.Companion.TYPE_EARTH
@@ -38,6 +39,27 @@ class RecyclerActivityAdapter(
         holder.bind(data[position])
     }
 
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty())
+            super.onBindViewHolder(holder, position, payloads)
+        else {
+            val combinedChange =
+                createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
+            val oldData = combinedChange.oldData
+            val newData = combinedChange.newData
+
+            if (newData.first.someText != oldData.first.someText) {
+                holder.itemView.findViewById<TextView>(R.id.marsTextView).text = newData.first.someText
+            }
+            /*if (payloads.any { it is Pair<*, *> })
+                holder.itemView.findViewById<TextView>(R.id.marsTextView).text = data[position].first.someText*/
+        }
+    }
+
     override fun getItemCount(): Int {
         return data.size
     }
@@ -51,7 +73,7 @@ class RecyclerActivityAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateItem() = Pair(Data(TYPE_MARS, "Mars", ""), false)
+    private fun generateItem() = Pair(Data(100, TYPE_MARS, "Mars", ""), false)
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         data.removeAt(fromPosition).apply {
@@ -63,6 +85,13 @@ class RecyclerActivityAdapter(
     override fun onItemDismiss(position: Int) {
         data.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun setItems(newItems: List<Pair<Data, Boolean>>) {
+        val result = DiffUtil.calculateDiff(DiffUtilCallback(data, newItems))
+        result.dispatchUpdatesTo(this)
+        data.clear()
+        data.addAll(newItems)
     }
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
@@ -141,8 +170,12 @@ class RecyclerActivityAdapter(
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
 
-        override fun bind(data: Pair<Data, Boolean>) {
-            itemView.setOnClickListener { onListItemClickListener.onItemClick(data.first) }
+        override fun bind(dataItem: Pair<Data, Boolean>) {
+            itemView.setOnClickListener {
+                // onListItemClickListener.onItemClick(data.first)
+                data[1] = Pair(Data(99, TYPE_MARS, "Jupiter", ""), false)
+                notifyItemChanged(1, Pair(Data(99, TYPE_MARS, "", ""), false))
+            }
         }
     }
 }
