@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.geekbrains.materialyou.R
-import ru.alekseysapi.materialyou.R
 
 class EarthFragment : Fragment() {
 

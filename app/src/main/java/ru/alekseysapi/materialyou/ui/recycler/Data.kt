@@ -1,6 +1,7 @@
 package com.geekbrains.materialyou.ui.recycler
 
 data class Data(
+    val id: Int = 0,
     val type: Int = TYPE_EARTH,
     val someText: String = "Text",
     val someDescription: String? = "Description"

@@ -51,6 +51,11 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
         setBottomAppBar(view)
+
+        /*activity?.let {
+            binding.textView.typeface =
+                Typeface.createFromAsset(it.assets, "Aloevera.ttf")// или "fonts/Aloevera.ttf", если шрифты в папке assets/fonts
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -94,6 +99,13 @@ class PictureOfTheDayFragment : Fragment() {
                         placeholder(R.drawable.ic_no_photo_vector)
                         crossfade(true)
                     }
+                }
+
+                val text = serverResponseData.explanation
+                if (text.isNullOrEmpty()) {
+                    toast("Explanation is empty")
+                } else {
+                    binding.textView.text = text
                 }
             }
             is PictureOfTheDayData.Loading -> {
