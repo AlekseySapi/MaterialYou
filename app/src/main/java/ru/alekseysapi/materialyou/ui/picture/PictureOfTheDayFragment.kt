@@ -52,10 +52,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
         setBottomAppBar(view)
 
-        /*activity?.let {
-            binding.textView.typeface =
-                Typeface.createFromAsset(it.assets, "Aloevera.ttf")// или "fonts/Aloevera.ttf", если шрифты в папке assets/fonts
-        }*/
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -85,14 +82,8 @@ class PictureOfTheDayFragment : Fragment() {
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
-                    //Отобразите ошибку
-                    //showError("Сообщение, что ссылка пустая")
                     toast("Link is empty")
                 } else {
-                    //Отобразите фото
-                    //showSuccess()
-                    //Coil в работе: достаточно вызвать у нашего ImageView нужную extension-функцию и передать ссылку на изображение
-                    //а в лямбде указать дополнительные параметры (не обязательно) для отображения ошибки, процесса загрузки, анимации смены изображений
                     binding.imageView.load(url) {
                         lifecycle(this@PictureOfTheDayFragment)
                         error(R.drawable.ic_load_error_vector)
@@ -103,17 +94,15 @@ class PictureOfTheDayFragment : Fragment() {
 
                 val text = serverResponseData.explanation
                 if (text.isNullOrEmpty()) {
-                    toast("Explanation is empty")
+                    toast(getString(R.string.expl_null))
                 } else {
                     binding.textView.text = text
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                //Отобразите загрузку
                 //showLoading()
             }
             is PictureOfTheDayData.Error -> {
-                //Отобразите ошибку
                 //showError(data.error.message)
                 toast(data.error.message)
             }
