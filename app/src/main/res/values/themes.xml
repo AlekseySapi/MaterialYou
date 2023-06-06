@@ -5,12 +5,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorAccent</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="themeColorPrimary">@color/colorPrimary</item>
         <!--<item name="fontFamily">@font/beau_rivage_regular</item>
@@ -21,6 +17,10 @@
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
+    </style>
+
+    <style name="Splash" parent="Theme.MaterialYou">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
     </style>
 
     <style name="AppCard" parent="Widget.MaterialComponents.CardView">
